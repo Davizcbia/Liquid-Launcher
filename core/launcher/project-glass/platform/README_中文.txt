@@ -1,0 +1,3 @@
+Windows代码保留说明
+windows-legacy保存09.31的完整Qt Quick模拟玻璃与侧栏全窗口模糊合成代码，供Windows移植参考。独立存档，不在macOS构建中引用。根目录仍包含当前功能的Qt回退路径。
+后续Windows实现以当前布局/功能为准，复用此存档的材质合成逻辑；它不是已完成或验证的Windows原生Liquid Glass。

@@ -1,0 +1,12 @@
+Repository: https://github.com/PrismLauncher/PrismLauncher
+Commit: 390a240abaefe389d1ab8510cc0ba5c2692a65be
+Modified: launcher/Application.cpp, launcher/main.cpp, launcher/CMakeLists.txt,
+          program_info/CMakeLists.txt, CMakeLists.txt
+Added: launcher/project-glass (accepted 10.16 frontend + direct core adapter)
+Retained: upstream source license headers and LICENSE/COPYING.md
+Service credentials: upstream Microsoft/CurseForge/Imgur defaults cleared.
+11.03 frontend lifecycle: explicit ordered shutdown, root Close handling with
+accepted-close visibility check, deferred quit while core launch tasks run,
+release all native callback closures. No forced process termination.
+Checks: QML parser, shell syntax, callback release coverage and existing layout tests.
+Limitations: native C++ compilation and actual Dock teardown are not verified here.

@@ -1,0 +1,92 @@
+{
+    "$schema": "https://cmake.org/cmake/help/latest/_downloads/3e2d73bff478d88a7de0de736ba5e361/schema.json",
+    "version": 8,
+    "cmakeMinimumRequired": {
+        "major": 3,
+        "minor": 28
+    },
+    "configurePresets": [
+        {
+            "name": "default",
+            "displayName": "Default",
+            "binaryDir": "build",
+            "installDir": "install",
+            "generator": "Ninja Multi-Config",
+            "toolchainFile": "cmake/vcpkg/scripts/buildsystems/vcpkg.cmake",
+            "cacheVariables": {
+                "Launcher_ENABLE_JAVA_DOWNLOADER": "ON",
+                "Launcher_WARNING_AS_ERROR": "ON",
+                "ENABLE_LTO": "ON"
+            }
+        },
+        {
+            "name": "ci",
+            "displayName": "CI",
+            "inherits": [
+                "default"
+            ],
+            "cacheVariables": {
+                "Launcher_BUILD_ARTIFACT": "$penv{ARTIFACT_NAME}",
+                "Launcher_BUILD_PLATFORM": "$penv{BUILD_PLATFORM}"
+            }
+        },
+        {
+            "name": "asan-tidy",
+            "displayName": "ASan+clang-tidy",
+            "inherits": [
+                "default"
+            ],
+            "cacheVariables": {
+                "DEBUG_ADDRESS_SANITIZER": "ON",
+                "USE_CLANG_TIDY": "ON"
+            },
+            "environment": {
+                "DEBUG_ADDRESS_SANITIZER": "1"
+            }
+        }
+    ],
+    "buildPresets": [
+        {
+            "name": "default",
+            "displayName": "Default",
+            "configurePreset": "default"
+        },
+        {
+            "name": "ci",
+            "displayName": "CI",
+            "configurePreset": "ci"
+        },
+        {
+            "name": "asan-tidy",
+            "displayName": "ASan+clang-tidy",
+            "configurePreset": "asan-tidy"
+        }
+    ],
+    "testPresets": [
+        {
+            "name": "default",
+            "displayName": "Default",
+            "configurePreset": "default",
+            "output": {
+                "outputOnFailure": true
+            }
+        },
+        {
+            "name": "ci",
+            "displayName": "CI",
+            "configurePreset": "ci",
+            "output": {
+                "outputOnFailure": true,
+                "verbosity": "extra"
+            },
+            "execution": {
+                "noTestsAction": "error"
+            },
+            "filter": {
+                "exclude": {
+                    "name": "^example64|example$"
+                }
+            }
+        }
+    ]
+}
