@@ -1,4 +1,13 @@
-<img width="256" height="256" alt="Glossy VL Monogram App Icon (2)" src="https://github.com/user-attachments/assets/47584ce2-d47e-41d6-af2a-237d2e904cc1" />
+
+<div align="center">
+  <img
+    width="256"
+    height="256"
+    alt="VL Logo"
+    src="https://github.com/user-attachments/assets/47584ce2-d47e-41d6-af2a-237d2e904cc1"
+  />
+</div>
+
 
 # Vitra Launcher
 
