@@ -1,4 +1,4 @@
-<p align="center"><img src="docs/vitra-icon.png" width="128" alt="Vitra Launcher icon"></p>
+<img width="256" height="256" alt="Glossy VL Monogram App Icon (2)" src="https://github.com/user-attachments/assets/47584ce2-d47e-41d6-af2a-237d2e904cc1" />
 
 # Vitra Launcher
 
