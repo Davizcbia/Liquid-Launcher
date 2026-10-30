@@ -1,0 +1,26 @@
+# Build output (core/build-win11 contains the CurseForge API key in BuildConfig.cpp)
+core/build-*/
+core/build/
+build/
+# Release packages: attach them to GitHub releases instead
+dist/
+*.zip
+
+# vcpkg checkout used by build_windows.cmd (git clone into core/cmake/vcpkg)
+core/cmake/vcpkg/
+
+# Local test and review folders
+.codex-baseline/
+.ui-review/
+liquid glass test/
+
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vs/
+.vscode/
+.idea/
+*.user
+
+# Python
+__pycache__/

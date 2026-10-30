@@ -32,5 +32,5 @@ for helper in JavaCheck NewLaunch NewLaunchLegacy; do
 done
 game_data_dir="${PG_DATA_DIR:-$HOME/Library/Application Support/PrismLauncher}"
 if [ ! -d "$game_data_dir" ]; then game_data_dir="$HOME/Library/Application Support/ProjectGlassCore";fi
-printf 'Project Glass built-in core data: %s\n' "$game_data_dir"
+printf 'Vitra Launcher built-in core data: %s\n' "$game_data_dir"
 exec "$build_dir/PrismLauncher.app/Contents/MacOS/prismlauncher" --dir "$game_data_dir"

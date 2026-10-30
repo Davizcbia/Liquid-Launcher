@@ -1,41 +1,73 @@
-# Project Glass 11.12
+<p align="center"><img src="docs/vitra-icon.png" width="128" alt="Vitra Launcher 图标"></p>
 
-本版修正账号原生控件的重复外框、快速下载版本列表、安装后卡片刷新，以及播放条图像同步。
+# Vitra Launcher
 
-## 运行
+一款采用液态玻璃界面的 Minecraft 启动器，基于 [Prism Launcher](https://github.com/PrismLauncher/PrismLauncher) 开发。在 macOS 27 上设计，同时提供 Windows 版本。
 
-退出旧启动器，在解压目录执行：
+[English](README.md)
 
-```bash
-bash build_macos.sh
+## 功能
+
+- 液态玻璃界面：侧边栏、Dock 风格的启动栏，以及仿 iPadOS 设置的设置页
+- 下载 Minecraft 各版本及 Fabric、Forge、NeoForge、Quilt
+- 从 Modrinth 和 CurseForge 下载模组、资源包、光影包和整合包，并优先列出前置资源
+- 实例画布：支持分组、自定义卡片大小和背景
+- Microsoft 账户登录和离线游玩
+- 自动更新（Windows），有新版本时设置上会显示小红点
+- 可选：启动游戏前进行内存优化（Windows）
+- 英文和简体中文界面
+
+## 下载
+
+### Windows
+
+1. 在 [Releases](https://github.com/Davizcbia/Vitra-Launcher/releases) 下载 `VitraLauncher-Windows-MSVC-Portable-<版本号>.zip`。
+2. 解压到任意文件夹。
+3. 运行 `VitraLauncher.exe`。
+
+这是便携版：实例、账户和设置都保存在这个文件夹里。1.1.0 及以后的版本会自动更新；1.0.0 需要手动换成新版本一次。
+
+### macOS
+
+目前还没有打包好的 macOS 版本，请按下面的方法从源代码编译。
+
+## 从源代码编译
+
+### Windows
+
+需要：Visual Studio 2022（“使用 C++ 的桌面开发”）、Qt 6.12 MSVC 2022 64 位版（安装在 `C:\Qt`）、JDK 17，以及 vcpkg：
+
+```bat
+git clone https://github.com/microsoft/vcpkg core\cmake\vcpkg
+build_windows.cmd
 ```
 
-脚本会编译并启动。默认使用已有 PrismLauncher 数据目录；缺失时使用 ProjectGlassCore 目录。请避免同时运行使用同一数据目录的其他启动器。PG_DATA_DIR 可指定独立数据目录。
+`build_windows.cmd` 会编译并启动启动器；加上 `--no-run` 则只编译。打包发布用的 zip：
 
-缺少依赖时先执行：
+```powershell
+powershell -ExecutionPolicy Bypass -File package_windows.ps1
+```
+
+CurseForge 需要你自己的 API Key：编译前设置环境变量 `PG_CURSEFORGE_API_KEY`，否则不包含 CurseForge。不要把 Key 提交到仓库。
+
+### macOS
 
 ```bash
 brew install cmake ninja pkg-config extra-cmake-modules qt openjdk@17 cmark libarchive qrencode tomlplusplus zlib
+bash build_macos.sh
 ```
 
-## 本版
+## 翻译
 
-- 快速下载及嵌套下拉窗口各自保留原生玻璃附件，关闭下拉时不再切换其他窗口的材质状态。
-- 快速下载的输入面板和下拉选中胶囊使用 NSGlassEffectView；选中胶囊按列表裁切。
-- 下载版本列表每行提供原生玻璃 Download 按钮；点击行主体仅选中，点击按钮才开始安装。移除截图中的两行说明，非原版安装不再使用重复的底部 Install 按钮。
-- 实例侧栏图标和播放条使用相同的卡片图案/自定义背景，默认图案搭配提取的颜色。
-- 画布空白处右键“Edit card sizes…”进入尺寸编辑，拖动卡片边缘；“Done resizing”或 Esc 退出。最小 180×126，最大 640×480，宽高可独立调整并保存。三个预设仍保留。
-- 自动布局/分组使用右边、下边和右下角调整，自动重新排列；自由布局支持四边及四角，保持对边位置。
-- 保留 11.11 的完整正式版快速下载列表、安装后事件刷新，以及 Modrinth 安装接口。
+界面文字在 `translation/Vitra 界面翻译.xlsx` 中。修改后运行 `python translation/build_translations.py`（需要 `openpyxl`），再重新编译。
 
-## 验证范围
+## 已知问题
 
-QML 解析、界面点击、100 项版本列表与重试、图像同步、75% 缩放下实际鼠标拖动和分组调整测试通过。另有 200 项边缘尺寸/固定对边检查及自定义尺寸布局测试通过。
-当前环境未完成 macOS C++ 编译和原生界面实测。详细改动、测试和限制见 WORK_IN_PROGRESS.md。
+- 尚未在 macOS 26 上测试。
+- Windows 版沿用 macOS 的设计，部分材质效果与 macOS 原生版本不同。
 
-Microsoft 登录仍需项目自身有效的客户端 ID；离线身份不需要 Microsoft 认证，缺失的游戏资源仍需要联网下载。
+## 许可与致谢
 
-## 来源与许可
+Vitra Launcher 是 [Prism Launcher](https://github.com/PrismLauncher/PrismLauncher) 的修改版本（详见 [UPSTREAM.txt](UPSTREAM.txt)），与其相同，采用 [GNU 通用公共许可证 v3.0](LICENSE)。本项目不是 Prism Launcher 的官方发行版。
 
-基于 Prism 官方提交 390a240abaefe389d1ab8510cc0ba5c2692a65be。
-完整保留核心源码与许可证，新增核心接入代码采用 GPL-3.0-only；不是 Prism 官方发行版。
+Vitra Launcher 与 Mojang、Microsoft、Modrinth、CurseForge 均无关联，也未获得其认可。Minecraft 是 Mojang AB 的商标。

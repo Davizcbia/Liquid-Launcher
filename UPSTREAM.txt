@@ -1,12 +1,31 @@
-Repository: https://github.com/PrismLauncher/PrismLauncher
-Commit: 390a240abaefe389d1ab8510cc0ba5c2692a65be
-Modified: launcher/Application.cpp, launcher/main.cpp, launcher/CMakeLists.txt,
-          program_info/CMakeLists.txt, CMakeLists.txt
-Added: launcher/project-glass (accepted 10.16 frontend + direct core adapter)
-Retained: upstream source license headers and LICENSE/COPYING.md
-Service credentials: upstream Microsoft/CurseForge/Imgur defaults cleared.
-11.03 frontend lifecycle: explicit ordered shutdown, root Close handling with
-accepted-close visibility check, deferred quit while core launch tasks run,
-release all native callback closures. No forced process termination.
-Checks: QML parser, shell syntax, callback release coverage and existing layout tests.
-Limitations: native C++ compilation and actual Dock teardown are not verified here.
+Vitra Launcher is a modified version of Prism Launcher.
+
+Upstream repository: https://github.com/PrismLauncher/PrismLauncher
+Upstream commit:     390a240abaefe389d1ab8510cc0ba5c2692a65be
+License:             GPL-3.0-only (core/LICENSE, core/COPYING.md); upstream source
+                     license headers are retained.
+
+Added
+  core/launcher/project-glass   The Vitra interface (QML) and its bridge to the
+                                Prism core: download page (Modrinth and
+                                CurseForge), instance editor, settings, memory
+                                optimization, interface translation.
+  translation/                  Interface text and the script that builds
+                                core/launcher/project-glass/i18n.
+  build_windows.cmd, package_windows.ps1, build_macos.sh
+                                Build and release scripts.
+
+Modified (main changes)
+  core/launcher/Application.cpp, core/launcher/main.cpp
+                                Start the Vitra interface instead of the Widgets
+                                main window; start the updater with it; elevated
+                                memory optimization helper.
+  core/launcher/updater/        Update alerts setting and the pending update
+                                record used by the Settings badge.
+  core/CMakeLists.txt, core/launcher/CMakeLists.txt, core/program_info/
+                                Name (Vitra Launcher, VitraLauncher.exe),
+                                version, icon and updater repository.
+
+Service credentials: upstream Microsoft, CurseForge and Imgur defaults removed.
+Vitra uses its own Microsoft client ID; the CurseForge API key is supplied at
+build time and is not part of the source.

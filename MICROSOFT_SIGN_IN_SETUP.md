@@ -1,7 +1,14 @@
 # Microsoft sign-in
 
-11.17 已内置用户提供的 Liquid Launcher 应用 Client ID，普通使用直接 Add Microsoft account。
+Vitra Launcher ships with its own registered Microsoft application (client ID `d7f05b47-6847-4be4-962c-e3548dd1b0d5`, set in `core/CMakeLists.txt` as `Launcher_MSA_CLIENT_ID`). Users sign in with **Add Microsoft account**; nothing needs to be configured.
 
-如需开发者覆盖，可设置 PG_MSA_CLIENT_ID 后构建；已有运行时覆盖优先。Client ID 是应用标识，不是密码；无需 Client secret。
+## Using another client ID
 
-应用已注册不代表 Minecraft 服务端已批准访问。若失败，请保留真实错误，不要通过复制账号 token 绕过认证。当前版本未完成真实 Microsoft → Xbox → Minecraft 端到端验收。
+If you build your own fork, register your own application in the Microsoft Entra admin center (personal Microsoft accounts and public client flows enabled) and build with it:
+
+- macOS: `PG_MSA_CLIENT_ID=<your id> bash build_macos.sh`
+- Windows: pass `-DLauncher_MSA_CLIENT_ID=<your id>` to CMake, or change the default in `core/CMakeLists.txt`
+
+A client ID can also be set at runtime in **Settings › Launcher core › APIs**. It identifies the application and is not a secret; no client secret is used.
+
+A registered application still needs Mojang's approval to use the Minecraft services API. If sign-in fails, keep the real error message; never work around authentication by copying account tokens.
