@@ -11,7 +11,7 @@
 
 # Vitra Launcher
 
-A Minecraft launcher with a Liquid Glass interface, built on [Prism Launcher](https://github.com/PrismLauncher/PrismLauncher). Designed on macOS 27; a Windows build is available too.
+A Minecraft launcher with a Liquid Glass interface, built on [Prism Launcher](https://github.com/PrismLauncher/PrismLauncher). Designed on macOS 27; a Windows build is available too. Codes provided by AI like Claude and ChatGPT
 
 [简体中文](README_中文.md)
 
